@@ -1,0 +1,4 @@
+RewriteEngine on
+Options +FollowSymLinks
+Options All -Indexes
+
