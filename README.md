@@ -1,0 +1,18 @@
+simple-calendar
+===============
+
+Virtual Host:
+<VirtualHost calendar.me:80>
+DocumentRoot "/wamp/www/calendar"
+ServerName calendar.me
+<Directory "/wamp/www/calendar">
+allow from all
+order allow,deny
+# Enables .htaccess files for this site
+AllowOverride All
+</Directory>
+# Other directives here
+</VirtualHost>
+
+hosts.ini:
+127.0.0.10		calendar.me
