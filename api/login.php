@@ -4,11 +4,12 @@ session_start();
 include_once 'dbconnect.php';
 require_once 'class.Login.php';
 
-if(!empty(Login::getLoggedInUser())){
-    Login::logout();
-}
-
 if(!empty($_POST['type']) && $_POST['type']=='authenticate') {
+    
+    $current_login = Login::getLoggedInUser();
+    if(!empty($current_login)){
+        Login::logout();
+    }
 
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         
@@ -17,7 +18,9 @@ if(!empty($_POST['type']) && $_POST['type']=='authenticate') {
             'password' => md5($_POST['password'])
         ), 'teacher');
         
-        if(!empty($data)) {            
+        if(!empty($data[0])) {   
+            $data = $data[0];
+            unset($data['password']);
             $_SESSION['user'] = $data;
             echo json_encode($data);
         }
